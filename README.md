@@ -1,4 +1,4 @@
-# Statistics Microservice Client SDK for Node.js
+# Statistics Microservice Client SDK for Node.js / ES2017
 
 This is a Node.js client SDK for [service-statistics](https://github.com/pip-services-infrastructure2/service-statistics-node) microservice.
 It provides an easy to use abstraction over communication protocols:
@@ -40,13 +40,13 @@ npm update
 
 Inside your code get the reference to the client SDK
 ```javascript
-var sdk = new require('client-statistics-node');
+let sdk = new require('client-statistics-node');
 ```
 
 Define client configuration parameters that match configuration of the microservice external API
 ```javascript
 // Client configuration
-var config = {
+let config = {
     connection: {
         protocol: 'http',
         host: 'localhost', 
@@ -58,47 +58,39 @@ var config = {
 Instantiate the client and open connection to the microservice
 ```javascript
 // Create the client instance
-var client = sdk.StatisticsHttpClientV1(config);
+let client = sdk.StatisticsHttpClientV1(config);
 
 // Connect to the microservice
-client.open(null, function(err) {
-    if (err) {
-        console.error('Connection to the microservice failed');
-        console.error(err);
-        return;
-    }
-    
+try {
+    await client.open(null);
     // Work with the microservice
     ...
-});
+} catch(err) {
+    console.error('Connection to the microservice failed');
+    console.error(err);
+}
 ```
 
 Now the client is ready to perform operations
 ```javascript
 // Increment counter value
-client.incrementConter(
+await client.incrementConter(
     null,
     'test_group',
     'test_counter',
-    1,
-    function (err) {
-        ...
-    }
+    1
 );
 ```
 
 ```javascript
-var now = new Date();
+let now = new Date();
 
 // Get total counter value
-client.getOneCounter(
+let set = await client.getOneCounter(
     null,
     'test_group',
     'test_counter',
     0, null, null
-    function(err, set) {
-    ...    
-    }
 );
 ```    
 
