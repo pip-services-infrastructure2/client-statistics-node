@@ -4,6 +4,7 @@ export declare class StatisticsClientFactory extends Factory {
     static Descriptor: Descriptor;
     static NullClientV1Descriptor: Descriptor;
     static DirectClientV1Descriptor: Descriptor;
-    static HttpClientV1Descriptor: Descriptor;
+    static CmdHttpClientV1Descriptor: Descriptor;
+    static CmdLambdaClientV1Descriptor: Descriptor;
     constructor();
 }

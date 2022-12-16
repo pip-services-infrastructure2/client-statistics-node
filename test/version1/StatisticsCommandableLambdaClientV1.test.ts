@@ -1,9 +1,9 @@
 import { ConfigParams } from 'pip-services3-commons-nodex';
 
 import { StatisticsClientFixtureV1 } from './StatisticsClientFixtureV1';
-import { StatisticsLambdaClientV1 } from '../../src/version1/StatisticsLambdaClientV1';
+import { StatisticsCommandableLambdaClientV1 } from '../../src/version1/StatisticsCommandableLambdaClientV1';
 
-suite('StatisticsLambdaClient', () => {
+suite('StatisticsCommandableLambdaClient', () => {
     let AWS_LAMDBA_ARN = process.env["AWS_LAMDBA_ARN"] || "";
     let AWS_ACCESS_ID = process.env["AWS_ACCESS_ID"] || "";
     let AWS_ACCESS_KEY = process.env["AWS_ACCESS_KEY"] || "";
@@ -25,11 +25,11 @@ suite('StatisticsLambdaClient', () => {
     if (lambdaConfig.getAsNullableString("connection.protocol") != "aws")
         return;
 
-    let client: StatisticsLambdaClientV1;
+    let client: StatisticsCommandableLambdaClientV1;
     let fixture: StatisticsClientFixtureV1;
 
     setup(async () => {
-        client = new StatisticsLambdaClientV1();
+        client = new StatisticsCommandableLambdaClientV1();
         client.configure(lambdaConfig);
 
         fixture = new StatisticsClientFixtureV1(client);

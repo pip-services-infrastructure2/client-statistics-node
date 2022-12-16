@@ -10,7 +10,7 @@ import { StatCounterIncrementV1 } from './StatCounterIncrementV1';
 import { StatCounterTypeV1 } from './StatCounterTypeV1';
 import { StatCounterValueSetV1 } from './StatCounterValueSetV1';
 
-export class StatisticsHttpClientV1 extends CommandableHttpClient implements IStatisticsClientV1 {
+export class StatisticsCommandableHttpClientV1 extends CommandableHttpClient implements IStatisticsClientV1 {
 
     constructor(config?: any) {
         super('v1/statistics');

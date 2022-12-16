@@ -9,14 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StatisticsDirectClientV1 = void 0;
+exports.StatisticsCommandableHttpClientV1 = void 0;
 const pip_services3_commons_nodex_1 = require("pip-services3-commons-nodex");
-const pip_services3_commons_nodex_2 = require("pip-services3-commons-nodex");
 const pip_services3_rpc_nodex_1 = require("pip-services3-rpc-nodex");
-class StatisticsDirectClientV1 extends pip_services3_rpc_nodex_1.DirectClient {
+class StatisticsCommandableHttpClientV1 extends pip_services3_rpc_nodex_1.CommandableHttpClient {
     constructor(config) {
-        super();
-        this._dependencyResolver.put('controller', new pip_services3_commons_nodex_2.Descriptor("service-statistics", "controller", "*", "*", "*"));
+        super('v1/statistics');
         if (config != null)
             this.configure(pip_services3_commons_nodex_1.ConfigParams.fromValue(config));
     }
@@ -24,13 +22,16 @@ class StatisticsDirectClientV1 extends pip_services3_rpc_nodex_1.DirectClient {
         return __awaiter(this, void 0, void 0, function* () {
             let timing = this.instrument(correlationId, 'statistics.get_groups');
             try {
-                let res = yield this._controller.getGroups(correlationId, paging);
-                timing.endTiming();
-                return res;
+                return yield this.callCommand('get_groups', correlationId, {
+                    paging: paging
+                });
             }
             catch (err) {
                 timing.endFailure(err);
                 throw err;
+            }
+            finally {
+                timing.endTiming();
             }
         });
     }
@@ -38,13 +39,17 @@ class StatisticsDirectClientV1 extends pip_services3_rpc_nodex_1.DirectClient {
         return __awaiter(this, void 0, void 0, function* () {
             let timing = this.instrument(correlationId, 'statistics.get_counters');
             try {
-                let res = yield this._controller.getCounters(correlationId, filter, paging);
-                timing.endTiming();
-                return res;
+                return yield this.callCommand('get_counters', correlationId, {
+                    filter: filter,
+                    paging: paging
+                });
             }
             catch (err) {
                 timing.endFailure(err);
                 throw err;
+            }
+            finally {
+                timing.endTiming();
             }
         });
     }
@@ -52,13 +57,20 @@ class StatisticsDirectClientV1 extends pip_services3_rpc_nodex_1.DirectClient {
         return __awaiter(this, void 0, void 0, function* () {
             let timing = this.instrument(correlationId, 'statistics.increment_counter');
             try {
-                let res = yield this._controller.incrementCounter(correlationId, group, name, time, timezone, value);
-                timing.endTiming();
-                return res;
+                return yield this.callCommand('increment_counter', correlationId, {
+                    group: group,
+                    name: name,
+                    time: time,
+                    timezone: timezone,
+                    value: value
+                });
             }
             catch (err) {
                 timing.endFailure(err);
                 throw err;
+            }
+            finally {
+                timing.endTiming();
             }
         });
     }
@@ -66,12 +78,16 @@ class StatisticsDirectClientV1 extends pip_services3_rpc_nodex_1.DirectClient {
         return __awaiter(this, void 0, void 0, function* () {
             let timing = this.instrument(correlationId, 'statistics.increment_counters');
             try {
-                yield this._controller.incrementCounters(correlationId, increments);
-                timing.endTiming();
+                return yield this.callCommand('increment_counters', correlationId, {
+                    increments: increments
+                });
             }
             catch (err) {
                 timing.endFailure(err);
                 throw err;
+            }
+            finally {
+                timing.endTiming();
             }
         });
     }
@@ -79,13 +95,21 @@ class StatisticsDirectClientV1 extends pip_services3_rpc_nodex_1.DirectClient {
         return __awaiter(this, void 0, void 0, function* () {
             let timing = this.instrument(correlationId, 'statistics.read_one_counter');
             try {
-                let res = yield this._controller.readOneCounter(correlationId, group, name, type, fromTime, toTime, timezone);
-                timing.endTiming();
-                return res;
+                return yield this.callCommand('read_one_counter', correlationId, {
+                    group: group,
+                    name: name,
+                    type: type,
+                    from_time: fromTime,
+                    to_time: toTime,
+                    timezone: timezone
+                });
             }
             catch (err) {
                 timing.endFailure(err);
                 throw err;
+            }
+            finally {
+                timing.endTiming();
             }
         });
     }
@@ -93,13 +117,20 @@ class StatisticsDirectClientV1 extends pip_services3_rpc_nodex_1.DirectClient {
         return __awaiter(this, void 0, void 0, function* () {
             let timing = this.instrument(correlationId, 'statistics.read_counters_by_group');
             try {
-                let res = yield this._controller.readCountersByGroup(correlationId, group, type, fromTime, toTime, timezone);
-                timing.endTiming();
-                return res;
+                return yield this.callCommand('read_counters_by_group', correlationId, {
+                    group: group,
+                    type: type,
+                    from_time: fromTime,
+                    to_time: toTime,
+                    timezone: timezone
+                });
             }
             catch (err) {
                 timing.endFailure(err);
                 throw err;
+            }
+            finally {
+                timing.endTiming();
             }
         });
     }
@@ -107,16 +138,23 @@ class StatisticsDirectClientV1 extends pip_services3_rpc_nodex_1.DirectClient {
         return __awaiter(this, void 0, void 0, function* () {
             let timing = this.instrument(correlationId, 'statistics.read_counters');
             try {
-                let res = yield this._controller.readCounters(correlationId, counters, type, fromTime, toTime, timezone);
-                timing.endTiming();
-                return res;
+                return yield this.callCommand('read_counters', correlationId, {
+                    counters: counters,
+                    type: type,
+                    from_time: fromTime,
+                    to_time: toTime,
+                    timezone: timezone
+                });
             }
             catch (err) {
                 timing.endFailure(err);
                 throw err;
             }
+            finally {
+                timing.endTiming();
+            }
         });
     }
 }
-exports.StatisticsDirectClientV1 = StatisticsDirectClientV1;
-//# sourceMappingURL=StatisticsDirectClientV1.js.map
+exports.StatisticsCommandableHttpClientV1 = StatisticsCommandableHttpClientV1;
+//# sourceMappingURL=StatisticsCommandableHttpClientV1.js.map

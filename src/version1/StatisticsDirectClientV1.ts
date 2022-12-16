@@ -26,26 +26,26 @@ export class StatisticsDirectClientV1 extends DirectClient<any> implements IStat
         let timing = this.instrument(correlationId, 'statistics.get_groups');
           
         try {
-            return await this._controller.getGroups(correlationId, paging);
+            let res = await this._controller.getGroups(correlationId, paging);
+            timing.endTiming();
+            return res;
         } catch (err) {
             timing.endFailure(err);
             throw err;
-        } finally {
-            timing.endTiming();
-        }  
+        }
     }
 
     public async getCounters(correlationId: string, filter: FilterParams, paging: PagingParams): Promise<DataPage<StatCounterV1>> {
         let timing = this.instrument(correlationId, 'statistics.get_counters');
         
         try {
-            return await this._controller.getCounters(correlationId, filter, paging);
+            let res = await this._controller.getCounters(correlationId, filter, paging);
+            timing.endTiming();
+            return res;
         } catch (err) {
             timing.endFailure(err);
             throw err;
-        } finally {
-            timing.endTiming();
-        }      
+        }     
     }
     
     public async incrementCounter(correlationId: string, group: string, name: string,
@@ -53,13 +53,13 @@ export class StatisticsDirectClientV1 extends DirectClient<any> implements IStat
         let timing = this.instrument(correlationId, 'statistics.increment_counter');
         
         try {
-            return await this._controller.incrementCounter(correlationId, group, name, time, timezone, value);
+            let res = await this._controller.incrementCounter(correlationId, group, name, time, timezone, value);
+            timing.endTiming();
+            return res;
         } catch (err) {
             timing.endFailure(err);
             throw err;
-        } finally {
-            timing.endTiming();
-        }      
+        }    
     }
 
     public async incrementCounters(correlationId: string, increments: StatCounterIncrementV1[]): Promise<void> {
@@ -67,12 +67,11 @@ export class StatisticsDirectClientV1 extends DirectClient<any> implements IStat
         
         try {
             await this._controller.incrementCounters(correlationId, increments);
+            timing.endTiming();
         } catch (err) {
             timing.endFailure(err);
             throw err;
-        } finally {
-            timing.endTiming();
-        }   
+        } 
     }
 
     public async readOneCounter(correlationId: string, group: string, name: string, type: StatCounterTypeV1,
@@ -80,13 +79,13 @@ export class StatisticsDirectClientV1 extends DirectClient<any> implements IStat
         let timing = this.instrument(correlationId, 'statistics.read_one_counter');
         
         try {
-            return await this._controller.readOneCounter(correlationId, group, name, type, fromTime, toTime, timezone);
+            let res = await this._controller.readOneCounter(correlationId, group, name, type, fromTime, toTime, timezone);
+            timing.endTiming();
+            return res;
         } catch (err) {
             timing.endFailure(err);
             throw err;
-        } finally {
-            timing.endTiming();
-        }   
+        }  
     }
 
     public async readCountersByGroup(correlationId: string, group: string, type: StatCounterTypeV1,
@@ -94,13 +93,13 @@ export class StatisticsDirectClientV1 extends DirectClient<any> implements IStat
         let timing = this.instrument(correlationId, 'statistics.read_counters_by_group');
         
         try {
-            return await this._controller.readCountersByGroup(correlationId, group, type, fromTime, toTime, timezone);
+            let res = await this._controller.readCountersByGroup(correlationId, group, type, fromTime, toTime, timezone);
+            timing.endTiming();
+            return res;
         } catch (err) {
             timing.endFailure(err);
             throw err;
-        } finally {
-            timing.endTiming();
-        }   
+        }  
     }
 
     public async readCounters(correlationId: string, counters: StatCounterV1[], type: StatCounterTypeV1,
@@ -108,12 +107,12 @@ export class StatisticsDirectClientV1 extends DirectClient<any> implements IStat
         let timing = this.instrument(correlationId, 'statistics.read_counters');
         
         try {
-            return await this._controller.readCounters(correlationId, counters, type, fromTime, toTime, timezone);
+            let res = await this._controller.readCounters(correlationId, counters, type, fromTime, toTime, timezone);
+            timing.endTiming();
+            return res;
         } catch (err) {
             timing.endFailure(err);
             throw err;
-        } finally {
-            timing.endTiming();
-        }   
+        }
     }
 }

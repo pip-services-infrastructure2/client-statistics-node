@@ -6,7 +6,7 @@ import { ConsoleLogger } from 'pip-services3-components-nodex';
 import { StatisticsMemoryPersistence } from 'service-statistics-node';
 import { StatisticsController } from 'service-statistics-node';
 import { StatisticsHttpServiceV1 } from 'service-statistics-node';
-import { StatisticsHttpClientV1 } from '../../src/version1/StatisticsHttpClientV1';
+import { StatisticsCommandableHttpClientV1 } from '../../src/version1/StatisticsCommandableHttpClientV1';
 import { StatisticsClientFixtureV1 } from './StatisticsClientFixtureV1';
 
 var httpConfig = ConfigParams.fromTuples(
@@ -15,9 +15,9 @@ var httpConfig = ConfigParams.fromTuples(
     "connection.port", 3000
 );
 
-suite('StatisticsHttpClientV1', ()=> {
+suite('StatisticsCommandableHttpClientV1', ()=> {
     let service: StatisticsHttpServiceV1;
-    let client: StatisticsHttpClientV1;
+    let client: StatisticsCommandableHttpClientV1;
     let fixture: StatisticsClientFixtureV1;
 
     suiteSetup(async () => {
@@ -32,12 +32,12 @@ suite('StatisticsHttpClientV1', ()=> {
             new Descriptor('pip-services', 'logger', 'console', 'default', '1.0'), logger,
             new Descriptor('service-statistics', 'persistence', 'memory', 'default', '1.0'), persistence,
             new Descriptor('service-statistics', 'controller', 'default', 'default', '1.0'), controller,
-            new Descriptor('service-statistics', 'service', 'http', 'default', '1.0'), service
+            new Descriptor('service-statistics', 'service', 'commandable-http', 'default', '1.0'), service
         );
         controller.setReferences(references);
         service.setReferences(references);
 
-        client = new StatisticsHttpClientV1();
+        client = new StatisticsCommandableHttpClientV1();
         client.setReferences(references);
         client.configure(httpConfig);
 
