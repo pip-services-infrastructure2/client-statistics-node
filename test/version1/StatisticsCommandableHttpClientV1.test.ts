@@ -5,7 +5,7 @@ import { ConsoleLogger } from 'pip-services3-components-nodex';
 
 import { StatisticsMemoryPersistence } from 'service-statistics-node';
 import { StatisticsController } from 'service-statistics-node';
-import { StatisticsHttpServiceV1 } from 'service-statistics-node';
+import { StatisticsCommandableHttpServiceV1 } from 'service-statistics-node';
 import { StatisticsCommandableHttpClientV1 } from '../../src/version1/StatisticsCommandableHttpClientV1';
 import { StatisticsClientFixtureV1 } from './StatisticsClientFixtureV1';
 
@@ -16,7 +16,7 @@ var httpConfig = ConfigParams.fromTuples(
 );
 
 suite('StatisticsCommandableHttpClientV1', ()=> {
-    let service: StatisticsHttpServiceV1;
+    let service: StatisticsCommandableHttpServiceV1;
     let client: StatisticsCommandableHttpClientV1;
     let fixture: StatisticsClientFixtureV1;
 
@@ -25,7 +25,7 @@ suite('StatisticsCommandableHttpClientV1', ()=> {
         let persistence = new StatisticsMemoryPersistence();
         let controller = new StatisticsController();
 
-        service = new StatisticsHttpServiceV1();
+        service = new StatisticsCommandableHttpServiceV1();
         service.configure(httpConfig);
 
         let references: References = References.fromTuples(
